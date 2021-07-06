@@ -85,35 +85,29 @@ function wagesEarnedOnDate(obj, date) {
 }
 
 function allWagesFor(obj) {
-  // console.log(obj);
-  console.log(obj.timeInEvents);
-  obj.timeInEvents
-    .map((element) => wagesEarnedOnDate(element, element.date))
-    .reduce((a, b) => a + b, 0);
-  console.log(obj.timeInEvents)
-
-  // let allWage = [];
-  // // const array = .timeInEvents;
-  // for (const element of array) {
-  //   allWage.push(wagesEarnedOnDate(array[element], array[element].date));
-  // }
-  // return allWage.reduce((a, b) => a + b);
-}
-
-function findEmployeeByFirstName(srcArray, fName) {
-  for (let element of srcArray) {
-    if (element.firstName === fName) {
-      return element;
-    }
+  let result = [];
+  const allDates = obj.timeInEvents.map((element) => (element = element.date));
+  for (let element of allDates) {
+    result.push(wagesEarnedOnDate(obj, element));
   }
+  return result.reduce((a, b) => a + b, 0);
 }
+
+
+// function findEmployeeByFirstName(srcArray, fName) {
+//   for (let element of srcArray) {
+//     if (element.firstName === fName) {
+//       return element;
+//     }
+//   }
+// }
 
 function findEmployeeByFirstName(srcArray, fName) {
-  srcArray.filter((array) => array.firstName === fName);
+  return srcArray.find((obj) => obj.firstName === fName);
 }
 
-console.log(findEmployeeByFirstName(createEmployeeRecords(employee), "d"));
 
-function calculatePayroll(arrays) {
-  arrays.map(wagesEarnedOnDate(array)).reduce((a, b) => (a = a + b), 0);
+function calculatePayroll(array) {
+    return array.map(obj => allWagesFor(obj))
+    .reduce((a, b) => (a = a + b), 0);
 }
